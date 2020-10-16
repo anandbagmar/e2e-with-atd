@@ -1,0 +1,103 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+plugins {
+    id "org.sonarqube" version "2.7.1"
+}
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenLocal()
+    maven { url "http://repo.bodar.com" }
+    maven { url 'https://jitpack.io' }
+    maven { url "https://dl.bintray.com/epam/reportportal" }
+    mavenCentral()
+    jcenter()
+}
+
+project.ext.currentDateTime = new Date().format('MM-dd-HH-mm-ss')
+project.ext.log4jProperties = "src/test/resources/log4j2.properties"
+project.ext.logDir = "${rootDir}/target"
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+compileJava {options.encoding = "UTF-8"}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'lib')
+    implementation "org.assertj:assertj-core:$project.assertJVersion"
+//    implementation "com.github.AppiumTestDistribution:AppiumTestDistribution:$project.atdVersion"
+    implementation "com.github.saikrishna321:AppiumTestDistribution:$project.atdVersion"
+    implementation("com.applitools:eyes-selenium-java3:$project.applitoolsVersion") {
+        exclude group: 'java-client'
+        exclude group: 'selenium-java'
+    }
+    implementation files("$buildDir/classes/test")
+}
+
+clean.doFirst {
+    println "********************* Clean.doFirst - start *********************"
+    delete "${buildDir}"
+    println "Deleted dir - ${buildDir}"
+    delete "${project.logDir}"
+    println "Deleted dir - ${project.logDir}"
+    println "********************* Clean.doFirst - finish *********************"
+    println ""
+}
+
+clean.doLast {
+    println "********************* Clean.doLast - start *********************"
+    mkdir "${project.logDir}"
+    println "Created dir - ${project.logDir}"
+    println "********************* Clean.doLast - finish *********************"
+    println ""
+    println "**************** buildDir - ${buildDir}"
+}
+
+private String setParallelCount () {
+    println "parallel - ${System.getenv("parallel")}"
+    if (!System.getenv("parallel") || System.getenv("parallel") == "") {
+        def parallel = 1
+        println "Setting default parallel count: ${parallel}"
+        return parallel
+    } else {
+        println "Using parallel count provided as environment variable - ${System.getenv("parallel")}"
+        return System.getenv("parallel")
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ["--plugin", "pretty",
+                    "--plugin", "com.cucumber.listener.CucumberScenarioListener",
+                    "--plugin", "com.cucumber.listener.CucumberScenarioReporterListener",
+                    "--plugin", "html:${project.logDir}/reports/cucumber-html-report.html",
+                    "--plugin", "junit:${project.logDir}/reports/cucumber-junit-report.xml",
+                    "--plugin", "json:${project.logDir}/reports/cucumber-json-report.json",
+                    "--plugin", "message:${project.logDir}/reports/results.ndjson",
+                    "--plugin", "timeline:${project.logDir}/reports/timeline",
+                    "--tags", "not @wip",
+                    "--glue", "com/jiomeet/e2e", "src/test/resources"
+            ]
+        }
+    }
+}
+
+cucumber.dependsOn clean
+
+wrapper {
+    gradleVersion = project.gradleVersion // version from gradle.properties
+}
