@@ -1,0 +1,13 @@
+rp.endpoint=http://localhost:8080
+rp.uuid=86bc7b4f-33a4-4f6b-bdbb-0f99973f9f0d
+rp.launch=e2e-with-atd
+rp.project=default_personal
+rp.username=default
+
+rp.enable=true
+rp.description=My cucumber tests with ATD
+rp.attributes=key:value; value;
+rp.convertimage=true
+rp.mode=DEFAULT
+rp.skipped.issue=true
+rp.batch.size.logs=20
