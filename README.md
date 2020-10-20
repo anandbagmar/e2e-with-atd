@@ -16,3 +16,13 @@ We will also integrate Applitools with this framework, to provide Visual AI test
 # Running the tests
 
 `./gradlew cucumber`
+
+# Configurations
+
+`Platform=android Threads=2 ./gradlew cucumber`
+The above command will run the tests against connected Android devices, with 2 tests running in parallel
+
+## Default configuration
+
+* Platform=android
+* Threads=1
