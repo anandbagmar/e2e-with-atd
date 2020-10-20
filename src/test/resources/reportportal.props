@@ -4,7 +4,7 @@ rp.launch=e2e-with-atd
 rp.project=default_personal
 rp.username=default
 
-rp.enable=true
+rp.enable=false
 rp.description=My cucumber tests with ATD
 rp.attributes=key:value; value;
 rp.convertimage=true
