@@ -36,7 +36,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'lib')
     implementation "org.assertj:assertj-core:$project.assertJVersion"
 //    implementation "com.github.AppiumTestDistribution:AppiumTestDistribution:$project.atdVersion"
-    implementation "com.github.saikrishna321:AppiumTestDistribution:$project.atdVersion"
+//    implementation "com.github.saikrishna321:AppiumTestDistribution:$project.atdVersion"
+    implementation 'com.github.anandbagmar:AppiumTestDistribution:751de38ea4'
     implementation("com.applitools:eyes-selenium-java3:$project.applitoolsVersion") {
         exclude group: 'java-client'
         exclude group: 'selenium-java'
