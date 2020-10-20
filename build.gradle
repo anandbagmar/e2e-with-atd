@@ -30,14 +30,14 @@ configurations {
     }
 }
 
-compileJava {options.encoding = "UTF-8"}
+compileJava { options.encoding = "UTF-8" }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'lib')
     implementation "org.assertj:assertj-core:$project.assertJVersion"
 //    implementation "com.github.AppiumTestDistribution:AppiumTestDistribution:$project.atdVersion"
 //    implementation "com.github.saikrishna321:AppiumTestDistribution:$project.atdVersion"
-    implementation 'com.github.anandbagmar:AppiumTestDistribution:751de38ea4'
+    implementation "com.github.anandbagmar:AppiumTestDistribution:$project.atdVersion"
     implementation("com.applitools:eyes-selenium-java3:$project.applitoolsVersion") {
         exclude group: 'java-client'
         exclude group: 'selenium-java'
@@ -64,37 +64,47 @@ clean.doLast {
     println "**************** buildDir - ${buildDir}"
 }
 
-private String setParallelCount () {
-    println "parallel - ${System.getenv("parallel")}"
-    if (!System.getenv("parallel") || System.getenv("parallel") == "") {
-        def parallel = 1
+private String getParallelCount () {
+    def parallel = "1"
+    if (!System.getenv("Threads") || System.getenv("Threads") == "") {
         println "Setting default parallel count: ${parallel}"
-        return parallel
     } else {
-        println "Using parallel count provided as environment variable - ${System.getenv("parallel")}"
-        return System.getenv("parallel")
+        parallel = System.getenv("Threads")
+        println "Using parallel count provided as environment variable - ${parallel}"
     }
+    return parallel
 }
 
-task cucumber() {
-    dependsOn assemble, compileTestJava
-    doLast {
-        javaexec {
-            main = "io.cucumber.core.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ["--plugin", "pretty",
-                    "--plugin", "com.cucumber.listener.CucumberScenarioListener",
-                    "--plugin", "com.cucumber.listener.CucumberScenarioReporterListener",
-                    "--plugin", "html:${project.logDir}/reports/cucumber-html-report.html",
-                    "--plugin", "junit:${project.logDir}/reports/cucumber-junit-report.xml",
-                    "--plugin", "json:${project.logDir}/reports/cucumber-json-report.json",
-                    "--plugin", "message:${project.logDir}/reports/results.ndjson",
-                    "--plugin", "timeline:${project.logDir}/reports/timeline",
-                    "--tags", "not @wip",
-                    "--glue", "com/jiomeet/e2e", "src/test/resources"
-            ]
-        }
+private String getPlatform () {
+    def platform = "android"
+    if (!System.getenv("Platform") || System.getenv("Platform") == "") {
+        println "Using default Platform: ${platform}"
+    } else {
+        parallel = System.getenv("Platform")
+        println "Using Platform provided as environment variable - ${platform}"
     }
+    return platform
+}
+
+task cucumber(type: JavaExec) {
+    dependsOn assemble, compileTestJava
+    def parallelCount = getParallelCount()
+    systemProperties = System.properties
+    main = "io.cucumber.core.cli.Main"
+    environment 'Platform', getPlatform()
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+    args = ["--plugin", "pretty",
+            "--threads", parallelCount,
+            "--plugin", "com.cucumber.listener.CucumberScenarioListener",
+            "--plugin", "com.cucumber.listener.CucumberScenarioReporterListener",
+            "--plugin", "html:${project.logDir}/reports/cucumber-html-report.html",
+            "--plugin", "junit:${project.logDir}/reports/cucumber-junit-report.xml",
+            "--plugin", "json:${project.logDir}/reports/cucumber-json-report.json",
+            "--plugin", "message:${project.logDir}/reports/results.ndjson",
+            "--plugin", "timeline:${project.logDir}/reports/timeline",
+            "--tags", "not @wip",
+            "--glue", "com/jiomeet/e2e", "src/test/resources"
+    ]
 }
 
 cucumber.dependsOn clean
