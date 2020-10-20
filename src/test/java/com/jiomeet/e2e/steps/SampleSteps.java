@@ -1,4 +1,4 @@
-package com.jiomeet.e2e;
+package com.jiomeet.e2e.steps;
 
 import com.jiomeet.e2e.UserBaseTest;
 import io.appium.java_client.MobileBy;
