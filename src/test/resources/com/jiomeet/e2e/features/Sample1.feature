@@ -1,4 +1,4 @@
-@smoke @wip
+@smoke
 Feature: Sample1 Feature
 
   This feature file just sleeps for a 4 seconds (one second each scenario)
