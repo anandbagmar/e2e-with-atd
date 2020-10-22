@@ -34,9 +34,7 @@ compileJava { options.encoding = "UTF-8" }
 
 dependencies {
     implementation "org.assertj:assertj-core:$project.assertJVersion"
-//    implementation "com.github.AppiumTestDistribution:AppiumTestDistribution:$project.atdVersion"
-//    implementation "com.github.saikrishna321:AppiumTestDistribution:$project.atdVersion"
-    implementation "com.github.anandbagmar:AppiumTestDistribution:$project.atdVersion"
+    implementation "com.github.AppiumTestDistribution:AppiumTestDistribution:$project.atdVersion"
     implementation "org.apache.commons:commons-lang3:$project.commonsLang3Version"
     implementation("com.applitools:eyes-selenium-java3:$project.applitoolsVersion") {
         exclude group: 'java-client'
