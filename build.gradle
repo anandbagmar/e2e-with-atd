@@ -79,7 +79,7 @@ private String getPlatform () {
     if (!System.getenv("Platform") || System.getenv("Platform") == "") {
         println "Using default Platform: ${platform}"
     } else {
-        parallel = System.getenv("Platform")
+        platform = System.getenv("Platform")
         println "Using Platform provided as environment variable - ${platform}"
     }
     return platform
