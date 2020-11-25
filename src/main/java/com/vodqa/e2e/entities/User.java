@@ -1,6 +1,6 @@
-package com.jiomeet.e2e.core.entities;
+package com.vodqa.e2e.entities;
 
-import com.jiomeet.e2e.core.utils.Randomizer;
+import com.vodqa.e2e.utils.Randomizer;
 
 public final class User {
   private final String lastName;

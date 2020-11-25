@@ -1,4 +1,4 @@
-package com.jiomeet.e2e;
+package com.vodqa.e2e;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.DataProvider;

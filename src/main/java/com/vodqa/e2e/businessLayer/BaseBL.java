@@ -1,14 +1,14 @@
-package com.jiomeet.e2e.steps;
+package com.vodqa.e2e.businessLayer;
 
-import com.context.SessionContext;
 import com.context.TestExecutionContext;
+import com.vodqa.e2e.context.Session;
 
-public class BaseSteps {
+public class BaseBL {
     private String testName;
     private TestExecutionContext testExecutionContext;
 
     protected String getTestName() {
-        if (null == testName){
+        if (null == testName) {
             testName = testContext().getTestName();
         }
         return testName;
@@ -16,9 +16,8 @@ public class BaseSteps {
 
     protected TestExecutionContext testContext() {
         if (null == testExecutionContext) {
-            testExecutionContext = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
+            testExecutionContext = Session.getTestExecutionContext(Thread.currentThread().getId());
         }
         return testExecutionContext;
     }
-
 }

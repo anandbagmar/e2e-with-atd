@@ -36,7 +36,7 @@ dependencies {
     implementation "org.assertj:assertj-core:$project.assertJVersion"
     implementation "com.github.AppiumTestDistribution:AppiumTestDistribution:$project.atdVersion"
     implementation "org.apache.commons:commons-lang3:$project.commonsLang3Version"
-    implementation("com.applitools:eyes-selenium-java3:$project.applitoolsVersion") {
+    implementation("com.applitools:eyes-appium-java3:$project.applitoolsVersion") {
         exclude group: 'java-client'
         exclude group: 'selenium-java'
     }
@@ -102,7 +102,7 @@ task cucumber(type: JavaExec) {
             "--plugin", "message:${project.logDir}/reports/results.ndjson",
             "--plugin", "timeline:${project.logDir}/reports/timeline",
             "--tags", "not @wip",
-            "--glue", "com/jiomeet/e2e", "src/test/resources"
+            "--glue", "com/vodqa/e2e", "src/test/resources"
     ]
 }
 

@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "BASE_URL": "https://dev.vodqa.com"
+  },
+  "qa": {
+    "BASE_URL": "https://qa.vodqa.com"
+  },
+  "prod": {
+    "BASE_URL": "https://vodqa.com"
+  }
+}

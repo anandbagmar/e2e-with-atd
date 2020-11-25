@@ -35,6 +35,9 @@ Reports will be uploaded to reportportal.
 * To verify appium installation is successful, run 
     `appium-doctor` - it should not report any errors
 * Install reportportal (Docker setup is the easiest way to proceed: https://reportportal.io/installation)
+* The tests run against the vodQA app. You can download it from the blow links and place it in the temp directory for the test to pick it up automatically. Alternatively, you can provide the below mentioned links in the caps/capabilities.json file
+    * Android: https://github.com/shridharkalagi/AppiumSample/raw/master/VodQA.apk 
+    * iOS: https://github.com/saikrishna321/AppiumTestDistribution/blob/master/apps/VodQAReactNative.zip?raw=true
  
 # Running the tests
 

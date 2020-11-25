@@ -1,7 +1,6 @@
-package com.jiomeet.e2e.steps;
+package com.vodqa.e2e.steps;
 
-import com.context.TestExecutionContext;
-import com.jiomeet.e2e.core.entities.User;
+import com.vodqa.e2e.entities.User;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
