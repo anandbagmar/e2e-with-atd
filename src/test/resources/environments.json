@@ -5,7 +5,7 @@
   "qa": {
     "BASE_URL": "https://qa.vodqa.com"
   },
-  "prod": {
+  "temp": {
     "BASE_URL": "https://vodqa.com"
   }
 }

@@ -5,6 +5,7 @@ Feature: Sample Feature
     It is not meant to do anything, but sleep
     So we can prove that it runs in parallel
 
+    @android @visual
     Scenario: Example 1 that sleep 1 seconds
         Given I login
         When I drag & drop

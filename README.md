@@ -45,10 +45,11 @@ Reports will be uploaded to reportportal.
 
 # Configurations
 
-`Platform=android Threads=2 ./gradlew cucumber`
-The above command will run the tests against connected Android devices, with 2 tests running in parallel
+`Visual=true Platform=android Threads=2 ./gradlew cucumber`
+The above command will run the tests against connected Android devices, with 2 tests running in parallel and Applitools Visual Testing enabled
 
 ## Default configuration
 
 * Platform=android
 * Threads=1
+* Visual=false

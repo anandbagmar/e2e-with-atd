@@ -1,9 +1,9 @@
-package com.vodqa.e2e.utils;
+package com.vodqa.e2e.tools;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class Randomizer {
-    public static String randomize(String randomizeTestData) {
+    public static String randomize (String randomizeTestData) {
         String randomizedValue = randomizeTestData;
         try {
             Long.parseLong(randomizeTestData);
