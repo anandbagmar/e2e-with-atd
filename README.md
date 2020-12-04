@@ -9,14 +9,17 @@ We will also integrate Applitools with this framework, to provide Visual AI test
 
 # What is this repository about?
 
-This repository implements automated tests for JioMeet, specified using cucumber-jvm and intelligently run them against
+This repository implements automated tests for Android & iOS apps, specified using cucumber-jvm and intelligently run them against
 * Android
 * iOS
+
+I will be adding support for the following soon:
 * Browser
+* Windows Apps
 
-We will also integrate Applitools with this framework, to provide Visual AI testing as part of functional automation.
+Applitools is integrated with this framework, to provide Visual AI testing as part of functional automation.
 
-Reports will be uploaded to reportportal. 
+Reports will be uploaded to reportportal.io, that you would need to setup separately, and provide the server details in src/test/resources/reportportal.properties file. 
  
 ## Tech stack used
 
@@ -30,8 +33,10 @@ Reports will be uploaded to reportportal.
 # Prerequisites
 
 * Install JDK and set JAVA_HOME
-* Setup Android Command-line tools and SDK
-* Install appium
+* Setup Android Command-line tools and SDK - https://developer.android.com/studio#command-tools
+* Install appium - http://appium.io/docs/en/about-appium/getting-started/
+* Install appium-doctor to diagnose and fix common Node, iOS and Android configuration issues before starting Appium - https://github.com/appium/appium-doctor
+* Appium Desktop App is a great way to identify locators, and the recorder is quite helpful to quickly identify multiple locators for your tests - https://github.com/appium/appium-desktop/releases/tag/v1.18.3
 * To verify appium installation is successful, run 
     `appium-doctor` - it should not report any errors
 * Install reportportal (Docker setup is the easiest way to proceed: https://reportportal.io/installation)
